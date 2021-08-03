@@ -1,0 +1,25 @@
+.table1{
+	border: 1px solid #ddd;
+	font-size: 14px;
+}
+.table1 tr {
+	height: 43px;
+}
+.table1 td {
+	border: 1px solid #ddd;
+	border-bottom: 0px;
+	border-top: 0px none;
+	text-align: center;
+}
+.table2{
+	border: 1px solid #ddd;
+	font-size: 14px;
+}
+.table2 tr {
+	height: 43px;
+}
+.table2 td {
+	border: 1px solid #ddd;
+	border-top: 0px none;
+	text-align: left;
+}

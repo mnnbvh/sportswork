@@ -1,0 +1,11 @@
+.caram {
+	padding-top: 10px;
+}
+.caramContent {
+	height: 480px;
+	overflow-y: auto;
+}
+.caramContent img{
+	width: 179px;
+	height: 109px;
+}

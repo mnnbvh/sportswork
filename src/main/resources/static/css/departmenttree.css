@@ -1,0 +1,86 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.part1 {
+	width: 290px;
+	display: inline-block;
+	vertical-align: top;
+}
+.part2 {
+	width: calc(100% - 300px);;
+	display: inline-block;
+}
+.template {
+	display: none;
+}
+.treeRow {
+	line-height: 40px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.menuTop {
+	height: 40px;
+	width:100%;
+	border-bottom: 1px solid #E9E9E9;
+}
+
+#menuTreesContent .activity {
+	background-color:#EAF6FD;
+	color: #66B8EF;
+}
+
+.meun-bar {
+	text-align: center;
+}
+
+.meun-bar a {
+	text-align: center;
+	text-decoration: none;
+}
+
+	#menuTreesContent {
+		border: 1px;
+		padding-left: 5px;
+	}
+	.element,
+    .outer-container {
+        width: 275px;
+        height: 520px;
+    }
+
+    .outer-container {
+        border: 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .inner-container {
+        position: absolute;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .inner-container::-webkit-scrollbar {
+        display: none;
+    }
+    .noneClass {
+		display: none;
+	}
+    .openClass {
+		display: inline-block;
+		background: url("../images/menu-open.jpg") no-repeat 0 10px;
+		height:40px;
+		width:35px;
+		float: left;
+	}
+	.closeClass {
+		display: inline-block;
+		background: url("../images/menu-close.jpg") no-repeat 0 10px;
+		height:40px;
+		width:35px;
+		float: left;
+	}

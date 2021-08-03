@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sportswork.sportswork.core.mapper.RobotDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sportswork.sportswork.entity.RobotEntity" id="robotMap">
+        <result property="id" column="id"/>
+        <result property="robotSn" column="robot_sn"/>
+        <result property="robotType" column="robot_type"/>
+        <result property="liveSn" column="live_sn"/>
+        <result property="robotInfo" column="robot_info"/>
+        <result property="remark" column="remark"/>
+        <result property="other" column="other"/>
+        <result property="online" column="online"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.sportswork.sportswork.entity.RobotEntity">
+		select ta.*,tb.username username from t_robot ta
+		left join (
+			select t1.id,GROUP_CONCAT(t3.username SEPARATOR ',') username from t_robot t1
+			left join t_usermapping t2 on t1.id = t2.robot_id
+			left join user t3 on t2.user_id = t3.id
+			group by t1.id
+		) tb on ta.id = tb.id
+		where ta.id = #{value}
+
+	</select>
+
+	<select id="queryList" resultType="com.sportswork.sportswork.entity.RobotEntity">
+		select ta.*,tb.username username from t_robot ta
+		left join (
+			select t1.id,GROUP_CONCAT(t3.username SEPARATOR ',') username from t_robot t1
+			left join t_usermapping t2 on t1.id = t2.robot_id
+			left join user t3 on t2.user_id = t3.id
+			<where>
+				<if test="userid != null and userid !=''">and t2.user_id = #{userid}</if>
+			</where>
+			group by t1.id
+		) tb on ta.id = tb.id
+		<where>
+			<if test="userid != null and userid !=''">and tb.username is not null</if>
+		</where>
+
+
+		<where>
+				<if test="id != null and id !=''">and id = #{id}</if>
+				<if test="robotSn != null and robotSn !=''">and robot_sn like #{robotSn}</if>
+				<if test="robotType != null and robotType !=''">and robot_type = #{robotType}</if>
+				<if test="liveSn != null and liveSn !=''">and live_sn = #{liveSn}</if>
+				<if test="robotInfo != null and robotInfo !=''">and robot_info = #{robotInfo}</if>
+				<if test="remark != null and remark !=''">and remark = #{remark}</if>
+				<if test="other != null and other !=''">and other = #{other}</if>
+				<if test="online != null and online !=''">and online = #{online}</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+<!--			<otherwise>-->
+<!--                order by id desc-->
+<!--			</otherwise>-->
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_robot 
+		<where>
+				<if test="id != null and id !=''">and id = #{id}</if>
+				<if test="robotSn != null and robotSn !=''">and robot_sn = #{robotSn}</if>
+				<if test="robotType != null and robotType !=''">and robot_type = #{robotType}</if>
+				<if test="liveSn != null and liveSn !=''">and live_sn = #{liveSn}</if>
+				<if test="robotInfo != null and robotInfo !=''">and robot_info = #{robotInfo}</if>
+				<if test="remark != null and remark !=''">and remark = #{remark}</if>
+				<if test="other != null and other !=''">and other = #{other}</if>
+				<if test="online != null and online !=''">and online = #{online}</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.sportswork.sportswork.entity.RobotEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into t_robot
+		(
+			`robot_sn`, 
+			`robot_type`, 
+			`live_sn`, 
+			`robot_info`, 
+			`remark`, 
+			`other`, 
+			`online`
+		)
+		values
+		(
+			#{robotSn}, 
+			#{robotType}, 
+			#{liveSn}, 
+			#{robotInfo}, 
+			#{remark}, 
+			#{other}, 
+			#{online}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.sportswork.sportswork.entity.RobotEntity">
+		update t_robot 
+		<set>
+			<if test="robotSn != null">`robot_sn` = #{robotSn}, </if>
+			<if test="robotType != null">`robot_type` = #{robotType}, </if>
+			<if test="liveSn != null">`live_sn` = #{liveSn}, </if>
+			<if test="robotInfo != null">`robot_info` = #{robotInfo}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="other != null">`other` = #{other}, </if>
+			<if test="online != null">`online` = #{online}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_robot where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_robot where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

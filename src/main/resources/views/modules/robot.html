@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../js/webuploader/webuploader.css">
+<script src="../../libs/jquery.min.js"></script>
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../libs/bootstrap.min.js"></script>
+<script src="../../libs/vue.min.js"></script>
+<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../plugins/My97DatePicker/WdatePicker.js"></script>
+
+<style>
+.search .row {
+	border-top: 0px solid;
+	margin: 0;
+	padding: 20px 2px 0px 2px;
+}
+
+.search input {
+	width: 200px;
+	display: inline-block;
+}
+
+.search select {
+	width: 200px;
+	display: inline-block;
+}
+
+.search label {
+	width: 90px;
+    text-align: right;
+}
+
+.col-search {
+	width: 320px;
+	display: inline-block;
+}
+
+.col-lab-form {
+	width: 120px;
+    display: inline-block;
+    float: left;
+}
+
+</style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		
+		<div class="search">
+			<div class="row ">
+				<div class="form-group col-search">
+					<label>机器人编号:</label>
+					<input type="text" class="form-control" placeholder="请输入sn" v-model = "search.robotSn"/>
+
+					<a class="btn btn-primary" @click="query"><i class="fa fa-search"></i>&nbsp;筛选</a>
+					<a class="btn btn-primary" @click="resetSearch"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+				</div>
+			</div>
+		</div>
+		<div class="grid-btn">
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			<a class="btn btn-primary" @click="updateEvent"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a class="btn btn-primary" @click="delEvent"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			<a class="btn btn-primary" @click="linkUser"><i class="fa fa-trash-o"></i>&nbsp;绑定</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div class="modal fade in" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width: 80%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <div class="modal-body">
+            
+         <form class="form-horizontal" style="width:100%">
+			<div class="form-group">
+		   	<div class="col-lab-form control-label">机器人编号</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.robotSn"  placeholder="请输入机器人编号"/>
+		    </div>
+		   	<div class="col-lab-form control-label">机器人类型</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.robotType"  placeholder="请输入机器人类型"/>
+		    </div>
+			</div>
+			<div class="form-group">
+		   	<div class="col-lab-form control-label">所在编号</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.liveSn"  placeholder="请输入所在编号"/>
+		    </div>
+		   	<div class="col-lab-form control-label">机器人信息</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.robotInfo"  placeholder="请输入机器人信息"/>
+		    </div>
+			</div>
+			<div class="form-group">
+		   	<div class="col-lab-form control-label">备注</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.remark"  placeholder="请输入备注"/>
+		    </div>
+		   	<div class="col-lab-form control-label">其他</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.other"  placeholder="请输入其他"/>
+		    </div>
+			</div>
+			<div class="form-group">
+		   	<div class="col-lab-form control-label">在线状态</div>
+		   	<div class="col-sm-3">
+		      <input type="text" class="form-control" v-model="robot.online"  placeholder="请输入在线状态"/>
+		    </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</form>
+			
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
+</div>
+<script src="../../js/modules/list/jdGridUtil.js"></script>
+<script src="../../js/modules/list/robotValidateData.js"></script>
+<script src="../../js/modules/list/robot.js"></script>
+</body>
+</html>

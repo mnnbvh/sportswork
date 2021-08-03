@@ -1,0 +1,21 @@
+table{
+	margin-top: 0px;
+	border-collapse:separate;
+	border-spacing:0px 50px;
+}
+table>tbody>tr>td {
+	vertical-align:top;
+}
+table>tbody>tr>td img{
+	width: 24px;
+	height: 24px;
+}
+.icoTitle{
+	font-size: 16px;
+	padding-bottom: 20px;
+}
+.icoT{
+}
+hr{
+	height:1px;border:none;border-top:1px solid #E1E1E1;margin-top: 10px;width: 80%;margin-left: 0px;
+}

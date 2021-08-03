@@ -1,0 +1,9 @@
+.addLeft {
+	float: left;
+	width: 20%;
+	padding-left: -10px;
+}
+.addRight {
+	width: 70%;
+	float: right;
+}

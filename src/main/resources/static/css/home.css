@@ -1,0 +1,11 @@
+.userStatusCount {
+	width: 50%;
+	float:left;
+}
+.userLocation {
+	width: 50%;
+	float: right;
+}
+.imgCountContent{
+	height: 222px;
+}

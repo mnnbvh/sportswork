@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sportswork.sportswork.core.mapper.UserDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sportswork.sportswork.entity.UserEntity" id="userMap">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="isDel" column="is_del"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="roleId" column="role_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.sportswork.sportswork.entity.UserEntity">
+		select * from user where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.sportswork.sportswork.entity.UserEntity">
+		select * from user
+		<where>
+				<if test="id != null and id !=''">and id = #{id}</if>
+				<if test="username != null and username !=''">and username = #{username}</if>
+				<if test="password != null and password !=''">and password = #{password}</if>
+				<if test="phone != null and phone !=''">and phone = #{phone}</if>
+				<if test="isDel != null and isDel !=''">and is_del = #{isDel}</if>
+				<if test="registerTime != null and registerTime !=''">and register_time = #{registerTime}</if>
+				<if test="roleId != null and roleId !=''">and role_id = #{roleId}</if>
+				<if test="createTime != null and createTime !=''">and create_time = #{createTime}</if>
+		</where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from user 
+		<where>
+				<if test="id != null and id !=''">and id = #{id}</if>
+				<if test="username != null and username !=''">and username = #{username}</if>
+				<if test="password != null and password !=''">and password = #{password}</if>
+				<if test="phone != null and phone !=''">and phone = #{phone}</if>
+				<if test="isDel != null and isDel !=''">and is_del = #{isDel}</if>
+				<if test="registerTime != null and registerTime !=''">and register_time = #{registerTime}</if>
+				<if test="roleId != null and roleId !=''">and role_id = #{roleId}</if>
+				<if test="createTime != null and createTime !=''">and create_time = #{createTime}</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.sportswork.sportswork.entity.UserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into user
+		(
+			`username`, 
+			`password`, 
+			`phone`, 
+			`is_del`, 
+			`register_time`, 
+			`role_id`, 
+			`create_time`
+		)
+		values
+		(
+			#{username}, 
+			#{password}, 
+			#{phone}, 
+			#{isDel}, 
+			#{registerTime}, 
+			#{roleId}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.sportswork.sportswork.entity.UserEntity">
+		update user 
+		<set>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="isDel != null">`is_del` = #{isDel}, </if>
+			<if test="registerTime != null">`register_time` = #{registerTime}, </if>
+			<if test="roleId != null">`role_id` = #{roleId}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from user where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

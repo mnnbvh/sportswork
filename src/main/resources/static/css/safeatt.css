@@ -1,0 +1,49 @@
+.content{
+	padding-left: 5%;
+	width: 90%;
+}
+.grid-btn{
+	padding-top: 30px;
+}
+.att1List{
+	display: flex;
+}
+.attDiv{
+	width:120px;
+	text-align: center;
+	padding-left: 30px;
+}
+.attObj{
+	width:120px;
+	height:120px;
+	background:rgba(248,248,248,1);
+	opacity:1;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+}
+hr{
+	border:none;
+	border-top:1px dashed rgba(194,194,194,1);
+}
+label {
+	font-size: 16px;
+}
+.close{
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+
+	/*font-size: 16px;
+	position:absolute;
+	right:5px;
+	top:5px;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	text-align: center;
+	color: #959595;
+	z-index: 1000;*/
+}

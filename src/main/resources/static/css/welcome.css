@@ -1,0 +1,24 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html,body {
+	height: 100%;
+}
+body{
+	background-image: url(../images/bg.png);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	background-attachment: fixed;
+}
+.set{
+	width: 100%;
+	text-align: right;
+}
+.set img{
+	width: 60px;
+	height: 60px;
+	padding-right: 30px;
+	padding-top: 10px;
+}
