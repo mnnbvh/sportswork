@@ -96,6 +96,11 @@ public class RobotController {
 	@RequestMapping("/save")
 	public R save(@RequestBody RobotEntity robot){
 		try{
+			//获取当前用户信息
+			UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+			SecurityUserInfo info =(SecurityUserInfo) authenticationToken.getPrincipal();
+			robot.setUsername(info.getUsername());
+			robotDao.bindRobot(info.getUserId(),robot.getId()+"");
 			robotService.save(robot);
 		}catch (Exception e){
 			return R.error("机器人编码重复");
