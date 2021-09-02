@@ -40,18 +40,14 @@
 		) tb on ta.id = tb.id
 		<where>
 			<if test="userid != null and userid !=''">and tb.username is not null</if>
-		</where>
-
-
-		<where>
-				<if test="id != null and id !=''">and id = #{id}</if>
-				<if test="robotSn != null and robotSn !=''">and robot_sn like #{robotSn}</if>
-				<if test="robotType != null and robotType !=''">and robot_type = #{robotType}</if>
-				<if test="liveSn != null and liveSn !=''">and live_sn = #{liveSn}</if>
-				<if test="robotInfo != null and robotInfo !=''">and robot_info = #{robotInfo}</if>
-				<if test="remark != null and remark !=''">and remark = #{remark}</if>
-				<if test="other != null and other !=''">and other = #{other}</if>
-				<if test="online != null and online !=''">and online = #{online}</if>
+			<if test="id != null and id !=''">and id = #{id}</if>
+			<if test="robotSn != null and robotSn !=''">and robot_sn like #{robotSn}</if>
+			<if test="robotType != null and robotType !=''">and robot_type = #{robotType}</if>
+			<if test="liveSn != null and liveSn !=''">and live_sn = #{liveSn}</if>
+			<if test="robotInfo != null and robotInfo !=''">and robot_info = #{robotInfo}</if>
+			<if test="remark != null and remark !=''">and remark = #{remark}</if>
+			<if test="other != null and other !=''">and other = #{other}</if>
+			<if test="online != null and online !=''">and online = #{online}</if>
 		</where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
