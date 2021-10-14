@@ -100,8 +100,9 @@ public class RobotController {
 			UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 			SecurityUserInfo info =(SecurityUserInfo) authenticationToken.getPrincipal();
 			robot.setUsername(info.getUsername());
-			robotDao.bindRobot(info.getUserId(),robot.getId()+"");
 			robotService.save(robot);
+			robotDao.bindRobot(info.getUserId(),robot.getId()+"");
+
 		}catch (Exception e){
 			return R.error("机器人编码重复");
 		}
