@@ -102,7 +102,6 @@ public class RobotController {
 			robot.setUsername(info.getUsername());
 			robotService.save(robot);
 			robotDao.bindRobot(info.getUserId(),robot.getId()+"");
-
 		}catch (Exception e){
 			return R.error("机器人编码重复");
 		}

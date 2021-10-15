@@ -28,7 +28,7 @@ public class MenuController {
 
     @RequestMapping("/admin/menu/list")
     public String List(){
-        return "/pages/view/admin/menu/roleList";
+        return "pages/view/admin/menu/roleList";
     }
 
     @RequestMapping("/admin/menu/getMenusByRole")

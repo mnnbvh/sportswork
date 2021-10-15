@@ -39,7 +39,7 @@ public class UserController {
 
     @RequestMapping("/admin/user/list")
     public String List(){
-        return "/pages/view/admin/user/list";
+        return "pages/view/admin/user/list";
     }
 
     @RequestMapping("/admin/user/getAllUsers")

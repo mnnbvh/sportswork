@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>com.sportswork</groupId>
-    <artifactId>sportswork</artifactId>
+    <artifactId>robot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MRZHAO</name>
+    <packaging>jar</packaging>
     <description>机器人后台管理</description>
 
     <properties>
@@ -126,6 +126,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- 模板html-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
